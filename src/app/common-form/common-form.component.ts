@@ -10,14 +10,15 @@ export class CommonFormComponent implements OnInit {
 
   constructor() { }
 
-  
+
   @Output() PaceFormsEmitter: EventEmitter<PaceInputModel[]>;
 
   PaceForms: PaceInputModel[];
-  
+
 
   ngOnInit(): void {
     this.PaceForms = [] as PaceInputModel[];
+    this.PaceFormsEmitter = new EventEmitter<PaceInputModel[]>();
   }
 
   handleAdd(e: Event) {
@@ -26,5 +27,10 @@ export class CommonFormComponent implements OnInit {
     if (this.PaceForms != null && this.PaceForms.length > 0 ) {
       this.PaceFormsEmitter.emit(this.PaceForms);
     }
+  }
+
+  handleClear(e: Event) {
+    this.PaceForms = [] as PaceInputModel[];
+    this.PaceFormsEmitter.emit(this.PaceForms);
   }
 }

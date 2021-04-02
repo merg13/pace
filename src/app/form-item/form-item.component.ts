@@ -17,16 +17,17 @@ sports: SportTypeEnum;
   ngOnInit(): void {
     this.model = new PaceInputModel();
     this.modelEmitter = new EventEmitter<PaceInputModel>();
+    this.model.sportType = SportTypeEnum.Run;
   }
 
 
-  
+
   handleCalculate() {
 
   }
 
 
   changeSport(e: Event){
-    
+
   }
 }
