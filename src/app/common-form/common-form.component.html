@@ -1,0 +1,10 @@
+<div class="row">
+    <a (click)='handleAdd($event);' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+</div>
+
+<div class="row">
+
+    <div *ngFor="let PaceForm of PaceForms">
+        <app-form-item [model]=PaceForm></app-form-item>
+    </div>
+</div>

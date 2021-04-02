@@ -1,0 +1,54 @@
+<!-- <div class="row">
+    <div class="col s6 left">
+        <h3>Time:</h3>
+
+    </div>
+    <div class="col s6 left">
+        <h3>Distance:</h3>
+
+    </div>
+</div> -->
+<div class="row">
+    <div class="col left">
+        <div class="input-field">
+            <select (change)="changeSport($event)">
+                <option value="">Choose your Sport</option>
+                <option *ngFor="let sport of sports" [ngValue]="sport">{{sport}}</option>
+             </select>
+        </div>    
+    </div>
+    <div class="col left">
+        <div class="input-field">
+            <input type="text" placeholder="Hrs">
+        </div>
+    </div>
+
+    <div class="col left">
+        <div class="input-field">
+            <input type="text" placeholder="Mins">
+        </div>
+    </div>
+    <div class="col left">
+        <div class="input-field">
+            <input type="text" placeholder="Secs">
+        </div>
+    </div>
+
+    <div class="col left">
+        <div class="input-field">
+            <input type="text" placeholder="Distance (miles)">
+        </div>
+    </div>
+    
+    <div class="col left">
+        <div class="input-field">
+            <input type="text" placeholder="Distance (kilometers)">
+        </div>
+    </div>    
+</div>
+<hr>
+<!-- Summary            miles           km
+---  Pace               6:00 min/mi           
+--- Total Distance      3.12mi        5km
+--- 1 mile == 1.60934 km
+-->
