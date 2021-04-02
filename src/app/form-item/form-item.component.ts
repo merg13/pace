@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SportTypeEnum } from '../enums/PaceEnums';
 import { PaceInputModel } from '../models/PaceInputModel';
+import { PaceResultModel } from '../models/PaceResultModel';
 
 @Component({
   selector: 'app-form-item',
@@ -9,25 +10,29 @@ import { PaceInputModel } from '../models/PaceInputModel';
 })
 export class FormItemComponent implements OnInit {
 
-@Output() modelEmitter: EventEmitter<PaceInputModel>;
-@Input() model: PaceInputModel;
-sports: SportTypeEnum;
-  constructor() { }
+@Output() inputModelEmitter: EventEmitter<PaceInputModel>;
+@Output() ouputModelEmitter: EventEmitter<PaceResultModel>;
+
+@Input() inputModel: PaceInputModel;
+@Input() outputModel: PaceResultModel;
+@Input() showKilometers: boolean;
+@Input() showMiles: boolean;
+
+  constructor() {
+
+    this.inputModel = new PaceInputModel();
+    this.outputModel = new PaceResultModel();
+
+    this.inputModelEmitter = new EventEmitter<PaceInputModel>();
+    this.ouputModelEmitter = new EventEmitter<PaceResultModel>();
+  }
 
   ngOnInit(): void {
-    this.model = new PaceInputModel();
-    this.modelEmitter = new EventEmitter<PaceInputModel>();
-    this.model.sportType = SportTypeEnum.Run;
-  }
-
-
-
-  handleCalculate() {
 
   }
 
-
-  changeSport(e: Event){
+  handleCalculate = () => {
+    //TODO: Calculate the output model and emit it back to parent;
 
   }
 }

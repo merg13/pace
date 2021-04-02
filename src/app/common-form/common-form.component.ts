@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SportTypeEnum } from '../enums/PaceEnums';
 import { PaceInputModel } from '../models/PaceInputModel';
 
 @Component({
@@ -9,6 +10,12 @@ import { PaceInputModel } from '../models/PaceInputModel';
 export class CommonFormComponent implements OnInit {
 
   constructor() { }
+
+  @Input() showMiles: boolean;
+  @Input() showKilometers: boolean;
+  @Input() addRunInput: boolean;
+  @Input() addBikeInput: boolean;
+  @Input() addSwimInput: boolean;
 
 
   @Output() PaceFormsEmitter: EventEmitter<PaceInputModel[]>;
@@ -22,8 +29,7 @@ export class CommonFormComponent implements OnInit {
   }
 
   handleAdd(e: Event) {
-    this.PaceForms.push(new PaceInputModel());
-    // this.PaceForms.push(e);
+    this.initInputs();
     if (this.PaceForms != null && this.PaceForms.length > 0 ) {
       this.PaceFormsEmitter.emit(this.PaceForms);
     }
@@ -32,5 +38,26 @@ export class CommonFormComponent implements OnInit {
   handleClear(e: Event) {
     this.PaceForms = [] as PaceInputModel[];
     this.PaceFormsEmitter.emit(this.PaceForms);
+  }
+
+  initInputs = () => {
+
+    if(this.addRunInput) {
+      var runInput = new PaceInputModel();
+      runInput.sportType = SportTypeEnum.Run;
+      this.PaceForms.push(runInput);
+    }
+
+    if(this.addBikeInput) {
+      var bikeInput = new PaceInputModel();
+      bikeInput.sportType = SportTypeEnum.Bike;
+      this.PaceForms.push(bikeInput);
+    }
+
+    if(this.addSwimInput) {
+      var swimInput = new PaceInputModel();
+      swimInput.sportType = SportTypeEnum.Swim;
+      this.PaceForms.push(swimInput);
+    }
   }
 }

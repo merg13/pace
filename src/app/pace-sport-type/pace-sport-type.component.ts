@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pace-sport-type',
   templateUrl: './pace-sport-type.component.html',
   styleUrls: ['./pace-sport-type.component.css']
 })
-export class PaceSportTypeComponent implements OnInit, AfterViewInit 
+export class PaceSportTypeComponent implements OnInit, AfterViewInit
   //Called after every check of the component's view. Applies to components only.
   //Add 'implements AfterViewChecked' to the class.
   {
@@ -22,7 +22,7 @@ export class PaceSportTypeComponent implements OnInit, AfterViewInit
     swimButtonSelector: HTMLElement;
     mileButtonSelector: HTMLElement;
     kilometerButtonSelector: HTMLElement;
-  
+
   constructor() { }
 
   ngOnInit(): void {
@@ -39,9 +39,9 @@ export class PaceSportTypeComponent implements OnInit, AfterViewInit
 
   toggleKilometers() {
     let isToggled = this.kilometerButtonSelector.classList.contains('darken-1');
-    
-      isToggled ? 
-        this.kilometerButtonSelector.classList.remove('darken-1', 'white-text') : 
+
+      isToggled ?
+        this.kilometerButtonSelector.classList.remove('darken-1', 'white-text') :
         this.kilometerButtonSelector.classList.add('darken-1', 'white-text');
 
     this.kilometerIsToggled.emit(!isToggled);
@@ -49,9 +49,9 @@ export class PaceSportTypeComponent implements OnInit, AfterViewInit
 
   toggleMiles() {
     let isToggled = this.mileButtonSelector.classList.contains('darken-1');
-    
-      isToggled ? 
-        this.mileButtonSelector.classList.remove('darken-1', 'white-text') : 
+
+      isToggled ?
+        this.mileButtonSelector.classList.remove('darken-1', 'white-text') :
         this.mileButtonSelector.classList.add('darken-1', 'white-text');
 
     this.mileIsToggled.emit(!isToggled);
@@ -59,9 +59,9 @@ export class PaceSportTypeComponent implements OnInit, AfterViewInit
 
   toggleRun() {
     let isToggled = this.runButtonSelector.classList.contains('darken-1');
-    
-    isToggled ? 
-      this.runButtonSelector.classList.remove('darken-1') : 
+
+    isToggled ?
+      this.runButtonSelector.classList.remove('darken-1') :
       this.runButtonSelector.classList.add('darken-1');
 
   this.runIsToggled.emit(!isToggled);
@@ -69,9 +69,9 @@ export class PaceSportTypeComponent implements OnInit, AfterViewInit
 
   toggleBike() {
     let isToggled = this.bikeButtonSelector.classList.contains('darken-1');
-    
-      isToggled ? 
-        this.bikeButtonSelector.classList.remove('darken-1') : 
+
+      isToggled ?
+        this.bikeButtonSelector.classList.remove('darken-1') :
         this.bikeButtonSelector.classList.add('darken-1');
 
     this.bikeIsToggled.emit(!isToggled);
@@ -79,9 +79,9 @@ export class PaceSportTypeComponent implements OnInit, AfterViewInit
 
   toggleSwim() {
     let isToggled = this.swimButtonSelector.classList.contains('darken-1');
-    
-      isToggled ? 
-        this.swimButtonSelector.classList.remove('darken-1') : 
+
+      isToggled ?
+        this.swimButtonSelector.classList.remove('darken-1') :
         this.swimButtonSelector.classList.add('darken-1');
 
     this.swimIsToggled.emit(!isToggled);

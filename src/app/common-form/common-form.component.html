@@ -7,6 +7,14 @@
 <div class="row">
 
     <div *ngFor="let PaceForm of PaceForms">
-        <app-form-item [model]=PaceForm></app-form-item>
+        <app-form-item
+          [inputModel]="PaceForm"
+          [showKilometers]="showKilometers"
+          [showMiles]="showMiles"
+          ></app-form-item>
     </div>
+</div>
+
+<div class="row">
+  <pre>{{PaceForms | json}}</pre>
 </div>
