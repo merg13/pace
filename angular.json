@@ -122,7 +122,11 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
-          "options": {}
+          "options": {
+            "baseHref": "https://merg13.github.io/Pace/",
+            "name": "Mitchell Ergen",
+            "email": "mitchellergen@gmail.com"
+          }
         }
       }
     }
