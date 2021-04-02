@@ -123,7 +123,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "https://merg13.github.io/Pace/",
+            "baseHref": "/pace/",
             "name": "Mitchell Ergen",
             "email": "mitchellergen@gmail.com"
           }
