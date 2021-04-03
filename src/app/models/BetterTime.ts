@@ -1,5 +1,6 @@
-export class BetterTime {
+import { Time } from "@angular/common";
 
+export class BetterTime implements Time{
     hours: number;
     minutes: number;
     seconds: number;

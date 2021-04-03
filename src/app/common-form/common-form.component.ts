@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { SportTypeEnum } from '../enums/PaceEnums';
 import { PaceInputModel } from '../models/PaceInputModel';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-common-form',
@@ -18,26 +19,24 @@ export class CommonFormComponent implements OnInit {
   @Input() addSwimInput: boolean;
 
 
-  @Output() PaceFormsEmitter: EventEmitter<PaceInputModel[]>;
+  @Output() paceFormsEmitter: EventEmitter<PaceInputModel[]> = new EventEmitter<PaceInputModel[]>();;
 
-  PaceForms: PaceInputModel[];
+  PaceForms: PaceInputModel[] = [] as PaceInputModel[];
 
 
   ngOnInit(): void {
-    this.PaceForms = [] as PaceInputModel[];
-    this.PaceFormsEmitter = new EventEmitter<PaceInputModel[]>();
   }
 
   handleAdd(e: Event) {
     this.initInputs();
     if (this.PaceForms != null && this.PaceForms.length > 0 ) {
-      this.PaceFormsEmitter.emit(this.PaceForms);
+      this.paceFormsEmitter.emit(this.PaceForms);
     }
   }
 
   handleClear(e: Event) {
     this.PaceForms = [] as PaceInputModel[];
-    this.PaceFormsEmitter.emit(this.PaceForms);
+    this.paceFormsEmitter.emit(this.PaceForms);
   }
 
   initInputs = () => {

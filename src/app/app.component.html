@@ -11,26 +11,43 @@
   <!-- component - buttons for picking what forms user wants to see -->
     <!-- TODO: input/output property that binds to forms in order to hide/show diff forms for pacing-->
   <div class="row">
-    <app-pace-sport-type (runIsToggled)='runIsToggled($event)' (bikeIsToggled)='bikeIsToggled($event)' (swimIsToggled)='swimIsToggled($event)' (kilometerIsToggled)='KilometersIsToggled($event)' (mileIsToggled)='MilesIsToggled($event)'></app-pace-sport-type>
+    <app-pace-sport-type
+      (runIsToggled)='runIsToggled($event)'
+      (bikeIsToggled)='bikeIsToggled($event)'
+      (swimIsToggled)='swimIsToggled($event)'
+      (kilometerIsToggled)='KilometersIsToggled($event)'
+      (mileIsToggled)='MilesIsToggled($event)'
+      [model]='paceSportTypeModel'
+      ></app-pace-sport-type>
   </div>
 
 
   <div class="row">
     <app-common-form
-      [showKilometers]="showKilometers"
-      [showMiles]="showMiles"
-      [addRunInput]="addRunInput"
-      [addBikeInput]="addBikeInput"
-      [addSwimInput]="addSwimInput"
+      [showKilometers]="paceSportTypeModel.addKilometers"
+      [showMiles]="paceSportTypeModel.addMiles"
+      [addRunInput]="paceSportTypeModel.addRunInput"
+      [addBikeInput]="paceSportTypeModel.addBikeInput"
+      [addSwimInput]="paceSportTypeModel.addSwimInput"
+      (paceFormsEmitter)="handleModelChange($event)"
     ></app-common-form>
   </div>
 
-  <hr>
-
-  <!-- TODO: Run Form Component -->
-<app-run-form *ngIf='AnyRunResults()'></app-run-form>
-  <!-- TODO: Bike Form Component -->
+    <!-- <div *ngFor="let result of resultModels">
+      {{result}}
+    </div>
+  <app-run-form *ngIf='AnyRunResults()'></app-run-form>
   <app-bike-form *ngIf='AnyRunResults()'></app-bike-form>
-  <!-- TODO: Swim Form Component -->
-<app-swim-form *ngIf='AnyRunResults()'></app-swim-form>
+  <app-swim-form *ngIf='AnyRunResults()'></app-swim-form> -->
+
+  <!-- <div class="row">
+    <p>InputModels:</p>
+    <pre>{{inputModels | json}}</pre>
+  </div> -->
+
+
+  <!-- End Container -->
 </div>
+
+
+

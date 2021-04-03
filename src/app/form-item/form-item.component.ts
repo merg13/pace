@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SportTypeEnum } from '../enums/PaceEnums';
-import { PaceInputModel } from '../models/PaceInputModel';
-import { PaceResultModel } from '../models/PaceResultModel';
+import { MileToKiloRatio, PaceInputModel } from '../models/PaceInputModel';
 
 @Component({
   selector: 'app-form-item',
@@ -11,24 +10,27 @@ import { PaceResultModel } from '../models/PaceResultModel';
 export class FormItemComponent implements OnInit {
 
 @Output() inputModelEmitter: EventEmitter<PaceInputModel>;
-@Output() ouputModelEmitter: EventEmitter<PaceResultModel>;
 
 @Input() inputModel: PaceInputModel;
-@Input() outputModel: PaceResultModel;
 @Input() showKilometers: boolean;
 @Input() showMiles: boolean;
 
   constructor() {
 
     this.inputModel = new PaceInputModel();
-    this.outputModel = new PaceResultModel();
-
     this.inputModelEmitter = new EventEmitter<PaceInputModel>();
-    this.ouputModelEmitter = new EventEmitter<PaceResultModel>();
   }
 
   ngOnInit(): void {
 
+  }
+
+  ConvertMilesToKilos = () => {
+    this.inputModel.distanceKilos = this.inputModel.distanceMiles * MileToKiloRatio;
+  }
+
+  ConvertKilosToMiles = () => {
+    this.inputModel.distanceMiles = this.inputModel.distanceKilos / MileToKiloRatio;
   }
 
   handleCalculate = () => {

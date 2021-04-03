@@ -8,6 +8,7 @@ import { BikeFormComponent } from './bike-form/bike-form.component';
 import { SwimFormComponent } from './swim-form/swim-form.component';
 import { CommonFormComponent } from './common-form/common-form.component';
 import { FormItemComponent } from './form-item/form-item.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormItemComponent } from './form-item/form-item.component';
     FormItemComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

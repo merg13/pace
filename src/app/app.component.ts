@@ -3,7 +3,10 @@ import { Component } from '@angular/core';
 import { PaceTypeEnum, SportTypeEnum } from './enums/PaceEnums';
 import { BetterTime } from './models/BetterTime';
 import { PaceInputModel } from './models/PaceInputModel';
-import { PaceResultModel } from './models/PaceResultModel';
+import { PaceSportTypeModel } from './models/PaceSportTypeModel';
+import { BaseFormResultFactory } from './services/BaseFormResultFactory';
+import { IFormResult } from './interfaces/IFormResult';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -13,50 +16,55 @@ import { PaceResultModel } from './models/PaceResultModel';
 
 export class AppComponent implements OnInit, OnChanges {
 
-  @Input() addRunInput: boolean = true;
-  @Input() addBikeInput: boolean = true;
-  @Input() addSwimInput: boolean = true;
+  @Input() paceSportTypeModel : PaceSportTypeModel;
+  @Input() inputModels: PaceInputModel[];
+  @Input() resultModels: IFormResult[];
 
-  @Input() showKilometers: boolean = true;
-  @Input() showMiles: boolean = true;
-
-  inputModels: PaceInputModel[];
-  resultModels: PaceResultModel[];
+  baseFormResultFactory: BaseFormResultFactory;
 
   ngOnInit(): void {
+    this.paceSportTypeModel =
+    {
+      addRunInput: true,
+      addBikeInput: false,
+      addSwimInput: false,
+      addKilometers: true,
+      addMiles: true
+    };
+
     this.inputModels = [] as PaceInputModel[];
-    this.resultModels = [] as PaceResultModel[];
-    this.AddMockData();
+    // this.AddMockData();
+
+    this.baseFormResultFactory = new BaseFormResultFactory();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
+    this.GetResults();
+  }
 
-    console.log(this.runIsToggled);
-    console.log(this.bikeIsToggled);
-    console.log(this.swimIsToggled);
-    console.log(this.showKilometers);
-    console.log(this.showMiles);
+  handleModelChange(models: PaceInputModel[]) {
+    this.inputModels = models;
   }
 
   runIsToggled(isToggled: boolean) {
-    this.addRunInput = isToggled;
+    this.paceSportTypeModel.addRunInput = isToggled;
   }
   bikeIsToggled(isToggled: boolean) {
-    this.addBikeInput = isToggled;
+    this.paceSportTypeModel.addBikeInput = isToggled;
   }
   swimIsToggled(isToggled: boolean) {
-    this.addSwimInput = isToggled;
+    this.paceSportTypeModel.addSwimInput = isToggled;
   }
 
 
   KilometersIsToggled(isToggled: boolean) {
-    this.showKilometers = isToggled;
+    this.paceSportTypeModel.addKilometers = isToggled;
   }
 
   MilesIsToggled(isToggled: boolean) {
-    this.showMiles = isToggled;
+    this.paceSportTypeModel.addMiles = isToggled;
   }
 
   AnyRunResults(): boolean {
@@ -72,30 +80,40 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
 
-  AddMockData = () => {
-    this.inputModels = [
-      {
-        paceType: PaceTypeEnum.Miles,
-        sportType: SportTypeEnum.Run,
-        duration: new BetterTime(),
-        distanceMiles: 5,
-        distanceKilos: 8
-      },
-      {
-        paceType: PaceTypeEnum.Miles,
-        sportType: SportTypeEnum.Bike,
-        duration: new BetterTime(),
-        distanceMiles: 5,
-        distanceKilos: 8
-      },
-      {
-        paceType: PaceTypeEnum.Miles,
-        sportType: SportTypeEnum.Swim,
-        duration: new BetterTime(),
-        distanceMiles: 1,
-        distanceKilos: 2
-      }
-    ]
+  // AddMockData = () => {
+  //   this.inputModels = [
+  //     {
+  //       paceType: PaceTypeEnum.Miles,
+  //       sportType: SportTypeEnum.Run,
+  //       totalTime: new Time(),
+  //       distanceMiles: 5,
+  //       distanceKilos: 8,
+  //       paceMiles: 0,
+  //       paceKilos: 0
+  //     },
+  //     {
+  //       paceType: PaceTypeEnum.Miles,
+  //       sportType: SportTypeEnum.Bike,
+  //       totalTime: new Time(),
+  //       distanceMiles: 5,
+  //       distanceKilos: 8,
+  //       paceMiles: 0,
+  //       paceKilos: 0
+  //     },
+  //     {
+  //       paceType: PaceTypeEnum.Miles,
+  //       sportType: SportTypeEnum.Swim,
+  //       totalTime: new Time(),
+  //       distanceMiles: 1,
+  //       distanceKilos: 2,
+  //       paceMiles: 0,
+  //       paceKilos: 0
+  //     }
+  //   ]
+  // }
+
+  GetResults = () => {
+    this.resultModels = this.baseFormResultFactory.resolve(this.inputModels);
   }
 }
 
