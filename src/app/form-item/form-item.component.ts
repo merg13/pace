@@ -25,6 +25,12 @@ export class FormItemComponent implements OnInit {
 
   }
 
+  handleFormInputChange(e: Event) {
+    this.inputModel.handleKilosOnChange();
+    this.inputModel.handleMilesOnChange();
+    this.inputModelEmitter.emit(this.inputModel);
+  }
+
   ConvertMilesToKilos = () => {
     this.inputModel.distanceKilos = this.inputModel.distanceMiles * MileToKiloRatio;
   }

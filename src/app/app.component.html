@@ -33,6 +33,62 @@
     ></app-common-form>
   </div>
 
+  <div class="row" *ngIf="!(totalResultModel.GetTotalMins() == 0 || totalResultModel.GetTotalMins() == null)">
+    <!-- {{ totalResultModel | json }} -->
+    <h4>Results</h4> <br>
+
+    <div class="col s2 offset-s1 left">
+      <label for="">TOTAL TIME</label> <br>
+      <label for="">TOTAL DISTANCE</label> <br>
+      <label for="">AVERAGE PACE</label>
+    </div>    <div class="col s2 left">
+      <!-- TOTAL TIME -->
+      <label for="">{{totalResultModel.totalTime.hours | number}} : </label>
+      <label>{{totalResultModel.totalTime.minutes | number}} : </label>
+      <label>{{ totalResultModel.totalTime.seconds | number}}</label> <br>
+      <!-- TOTAL DISTANCE -->
+      <label for="">{{totalResultModel.distanceMiles | number}} mi. </label>
+      <label for="">{{totalResultModel.distanceKilos | number}} km.</label>
+      <br>
+      <!-- AVERAGE PACE  -->
+      <label>{{totalResultModel.paceMiles.minutes | number:'1.0-0' }} : </label>
+      <label>{{ totalResultModel.paceMiles.seconds | number: '2.0-0' }} min/mi.   </label>
+      <label for="">({{totalResultModel.mph | number: '1.1'}} mph)</label>
+    </div>
+    <div class="col s4 left">
+      <div class="label">
+        <br>
+        <br>
+        <label>{{totalResultModel.paceKilos.minutes | number: '1.0-0' }} : </label>
+        <label>{{ totalResultModel.paceKilos.seconds | number: '2.0-0' }} min/km.   </label>
+        <label for="">({{totalResultModel.kph | number: '1.1'}} kph)</label>
+
+      </div>
+  </div>
+
+  <!-- <div class="row">
+
+    <div class="col s1 offset-s1 left">
+      <label for="">PACE</label>
+    </div>
+
+    <div class="col s5 left">
+        <label>{{totalResultModel.paceMiles.minutes | number:'1.0-0' }} : </label>
+        <label>{{ totalResultModel.paceMiles.seconds | number: '2.0-0' }} min/mi.</label> <br>
+        <label for="">{{totalResultModel.mph | number: '1.1'}} mph</label>
+    </div>
+
+    <div class="col s4 left">
+      <div class="label">
+        <label>{{totalResultModel.paceKilos.minutes | number: '1.0-0' }} : </label>
+        <label>{{ totalResultModel.paceKilos.seconds | number: '2.0-0' }} min/km.</label> <br>
+        <label for="">{{totalResultModel.kph | number: '1.1'}} kph</label>
+
+      </div>
+    </div>
+  </div> -->
+
+
     <!-- <div *ngFor="let result of resultModels">
       {{result}}
     </div>

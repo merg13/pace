@@ -10,8 +10,8 @@ export class PaceInputModel {
     paceType: PaceTypeEnum
     sportType: SportTypeEnum;
     totalTime: BetterTime = { hours: 0, minutes: 0, seconds: 0};
-    distanceMiles: number;
-    distanceKilos: number;
+    distanceMiles: number = 0;
+    distanceKilos: number = 0;
     paceMiles: BetterTime = { hours: 0, minutes: 0, seconds: 0};
     paceKilos: BetterTime = { hours: 0, minutes: 0, seconds: 0};
     mph: number = 0;

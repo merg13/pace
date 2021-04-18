@@ -25,10 +25,16 @@ export class CommonFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+
   }
 
   handleAdd(e: Event) {
     this.initInputs();
+    this.handleFormOnChange(e);
+  }
+
+  handleFormOnChange(e: Event) {
     if (this.PaceForms != null && this.PaceForms.length > 0 ) {
       this.paceFormsEmitter.emit(this.PaceForms);
     }

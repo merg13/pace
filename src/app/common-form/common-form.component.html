@@ -8,6 +8,7 @@
 
     <div *ngFor="let PaceForm of PaceForms">
         <app-form-item
+          (inputModelEmitter)="handleFormOnChange($event)"
           [inputModel]="PaceForm"
           [showKilometers]="showKilometers"
           [showMiles]="showMiles"

@@ -19,6 +19,7 @@ export class AppComponent implements OnInit, OnChanges {
   @Input() paceSportTypeModel : PaceSportTypeModel;
   @Input() inputModels: PaceInputModel[];
   @Input() resultModels: IFormResult[];
+  @Input() totalResultModel: PaceInputModel;
 
   baseFormResultFactory: BaseFormResultFactory;
 
@@ -34,18 +35,24 @@ export class AppComponent implements OnInit, OnChanges {
 
     this.inputModels = [] as PaceInputModel[];
     // this.AddMockData();
+    this.totalResultModel = new PaceInputModel();
 
     this.baseFormResultFactory = new BaseFormResultFactory();
+
+
+    this.inputModels
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
-    this.GetResults();
+    // this.GetResults();
+    this.HandleTotalResult();
   }
 
   handleModelChange(models: PaceInputModel[]) {
     this.inputModels = models;
+    this.HandleTotalResult();
   }
 
   runIsToggled(isToggled: boolean) {
@@ -114,6 +121,25 @@ export class AppComponent implements OnInit, OnChanges {
 
   GetResults = () => {
     this.resultModels = this.baseFormResultFactory.resolve(this.inputModels);
+  }
+
+  HandleTotalResult = () => {
+    this.totalResultModel = new PaceInputModel();
+    this.inputModels.forEach(m => this.calculateResult(m));
+  }
+
+  calculateResult(model: PaceInputModel) {
+    this.totalResultModel.totalTime.hours += model.totalTime.hours;
+    this.totalResultModel.totalTime.minutes += model.totalTime.minutes;
+    this.totalResultModel.totalTime.seconds += model.totalTime.seconds;
+    this.totalResultModel.distanceKilos = this.totalResultModel.distanceKilos + model.distanceKilos;
+    this.totalResultModel.distanceMiles = this.totalResultModel.distanceMiles + model.distanceMiles;
+    this.totalResultModel.getKph();
+    this.totalResultModel.getMph();
+    this.totalResultModel.GetKmPace();
+    this.totalResultModel.GetMiPace();
+
+
   }
 }
 
