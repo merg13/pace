@@ -4,9 +4,9 @@ import { PaceTypeEnum, SportTypeEnum } from './enums/PaceEnums';
 import { BetterTime } from './models/BetterTime';
 import { PaceInputModel } from './models/PaceInputModel';
 import { PaceSportTypeModel } from './models/PaceSportTypeModel';
-import { BaseFormResultFactory } from './services/BaseFormResultFactory';
-import { IFormResult } from './interfaces/IFormResult';
 import { EventEmitter } from '@angular/core';
+import { PaceStore } from './stores/pace.store';
+import { FormService } from './services/form.service';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +16,16 @@ import { EventEmitter } from '@angular/core';
 
 export class AppComponent implements OnInit, OnChanges {
 
-  @Input() paceSportTypeModel : PaceSportTypeModel;
-  @Input() inputModels: PaceInputModel[];
-  @Input() resultModels: IFormResult[];
-  @Input() totalResultModel: PaceInputModel;
+  public paceSportTypeModel : PaceSportTypeModel = {} as PaceSportTypeModel;
+  public inputModels: PaceInputModel[] = [] as PaceInputModel[];
+  public totalResultModel: PaceInputModel = new PaceInputModel();
 
-  baseFormResultFactory: BaseFormResultFactory;
+
+  constructor(private formService: FormService, private paceStore: PaceStore) {
+    paceStore.paceModels.subscribe(data => {
+      this.inputModels = data;
+    })
+  }
 
   ngOnInit(): void {
     this.paceSportTypeModel =
@@ -33,14 +37,8 @@ export class AppComponent implements OnInit, OnChanges {
       addMiles: true
     };
 
-    this.inputModels = [] as PaceInputModel[];
+    // DEBUG ONLY:
     // this.AddMockData();
-    this.totalResultModel = new PaceInputModel();
-
-    this.baseFormResultFactory = new BaseFormResultFactory();
-
-
-    this.inputModels
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -53,6 +51,16 @@ export class AppComponent implements OnInit, OnChanges {
   handleModelChange(models: PaceInputModel[]) {
     this.inputModels = models;
     this.HandleTotalResult();
+  }
+
+  initInputs = (e: Event) => {
+    if(this.paceSportTypeModel.addRunInput) this.formService.PostForm(this.formService.GetNewForm(SportTypeEnum.Run));
+    if(this.paceSportTypeModel.addBikeInput) this.formService.PostForm(this.formService.GetNewForm(SportTypeEnum.Bike));
+    if(this.paceSportTypeModel.addSwimInput) this.formService.PostForm(this.formService.GetNewForm(SportTypeEnum.Swim));
+  }
+
+  handleClear = (e: Event) => {
+    this.formService.DeleteAllForms();
   }
 
   runIsToggled(isToggled: boolean) {
@@ -84,6 +92,23 @@ export class AppComponent implements OnInit, OnChanges {
 
   AnySwimResults(): boolean {
     return this.inputModels.some(m => m.sportType == SportTypeEnum.Swim);
+  }
+
+  HandleTotalResult = () => {
+    this.totalResultModel = new PaceInputModel();
+    this.inputModels.forEach(m => this.calculateResult(m));
+  }
+
+  calculateResult(model: PaceInputModel) {
+    this.totalResultModel.totalTime.hours += model.totalTime.hours;
+    this.totalResultModel.totalTime.minutes += model.totalTime.minutes;
+    this.totalResultModel.totalTime.seconds += model.totalTime.seconds;
+    this.totalResultModel.distanceKilos = this.totalResultModel.distanceKilos + model.distanceKilos;
+    this.totalResultModel.distanceMiles = this.totalResultModel.distanceMiles + model.distanceMiles;
+    this.totalResultModel.getKph();
+    this.totalResultModel.getMph();
+    this.totalResultModel.GetKmPace();
+    this.totalResultModel.GetMiPace();
   }
 
 
@@ -118,29 +143,6 @@ export class AppComponent implements OnInit, OnChanges {
   //     }
   //   ]
   // }
-
-  GetResults = () => {
-    this.resultModels = this.baseFormResultFactory.resolve(this.inputModels);
-  }
-
-  HandleTotalResult = () => {
-    this.totalResultModel = new PaceInputModel();
-    this.inputModels.forEach(m => this.calculateResult(m));
-  }
-
-  calculateResult(model: PaceInputModel) {
-    this.totalResultModel.totalTime.hours += model.totalTime.hours;
-    this.totalResultModel.totalTime.minutes += model.totalTime.minutes;
-    this.totalResultModel.totalTime.seconds += model.totalTime.seconds;
-    this.totalResultModel.distanceKilos = this.totalResultModel.distanceKilos + model.distanceKilos;
-    this.totalResultModel.distanceMiles = this.totalResultModel.distanceMiles + model.distanceMiles;
-    this.totalResultModel.getKph();
-    this.totalResultModel.getMph();
-    this.totalResultModel.GetKmPace();
-    this.totalResultModel.GetMiPace();
-
-
-  }
 }
 
 

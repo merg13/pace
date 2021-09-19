@@ -1,14 +1,18 @@
 import { Time } from "@angular/common";
-import { PaceTypeEnum, SportTypeEnum } from "../enums/PaceEnums";
+import { PaceTypeEnum, SportTypeEnum } from '../enums/PaceEnums';
 import { BetterTime } from "./BetterTime";
 import { element } from 'protractor';
+import { ObjectUnsubscribedError } from "rxjs";
+import { v4 as uuidv4 } from 'uuid';
+
 
 // 1 mile is the same as 1.60934 kilometers
 export const MileToKiloRatio: number = 1.60934;
 export class PaceInputModel {
 
-    paceType: PaceTypeEnum
-    sportType: SportTypeEnum;
+    formId: string = uuidv4();
+    paceType: PaceTypeEnum = PaceTypeEnum.Miles;
+    sportType: SportTypeEnum = SportTypeEnum.Run;
     totalTime: BetterTime = { hours: 0, minutes: 0, seconds: 0};
     distanceMiles: number = 0;
     distanceKilos: number = 0;
@@ -56,7 +60,7 @@ export class PaceInputModel {
       let minutes = Math.floor(tempResult);
       let seconds = (tempResult - minutes) * 60;
 
-      this.paceMiles =  { hours: null, minutes: minutes, seconds: seconds };
+      this.paceMiles =  { hours: 0, minutes: minutes, seconds: seconds };
     }
 
     GetKmPace = () => {
@@ -64,7 +68,7 @@ export class PaceInputModel {
       let minutes = Math.floor(tempResult);
       let seconds = (tempResult - minutes) * 60;
 
-      this.paceKilos =  { hours: null, minutes: minutes, seconds: seconds };
+      this.paceKilos =  { hours: 0, minutes: minutes, seconds: seconds };
     }
 
     ConvertMilesToKilos = () => {

@@ -18,13 +18,13 @@ export class PaceSportTypeComponent implements OnInit, AfterViewInit
   @Output() mileIsToggled: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() kilometerIsToggled: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  @Input() model: PaceSportTypeModel;
+  @Input() model: PaceSportTypeModel = {} as PaceSportTypeModel;
 
-    runButtonSelector : HTMLElement;
-    bikeButtonSelector : HTMLElement;
-    swimButtonSelector: HTMLElement;
-    mileButtonSelector: HTMLElement;
-    kilometerButtonSelector: HTMLElement;
+    runButtonSelector : HTMLElement | null = null;
+    bikeButtonSelector : HTMLElement | null = null;
+    swimButtonSelector: HTMLElement | null = null;
+    mileButtonSelector: HTMLElement | null = null;
+    kilometerButtonSelector: HTMLElement | null = null;
 
   constructor() { }
 
@@ -45,52 +45,52 @@ export class PaceSportTypeComponent implements OnInit, AfterViewInit
   }
 
   toggleKilometers() {
-    this.model.addKilometers = this.kilometerButtonSelector.classList.contains('darken-1');
+    this.model.addKilometers = this.kilometerButtonSelector?.classList?.contains('darken-1') ?? null;
 
     this.model.addKilometers ?
-        this.kilometerButtonSelector.classList.remove('darken-1', 'white-text') :
-        this.kilometerButtonSelector.classList.add('darken-1', 'white-text');
+        this.kilometerButtonSelector?.classList.remove('darken-1', 'white-text') :
+        this.kilometerButtonSelector?.classList.add('darken-1', 'white-text');
 
     this.kilometerIsToggled.emit(!this.model.addKilometers);
   }
 
   toggleMiles() {
-    this.model.addMiles = this.mileButtonSelector.classList.contains('darken-1');
+    this.model.addMiles = this.mileButtonSelector?.classList.contains('darken-1') ?? null;
 
     this.model.addMiles ?
-        this.mileButtonSelector.classList.remove('darken-1', 'white-text') :
-        this.mileButtonSelector.classList.add('darken-1', 'white-text');
+        this.mileButtonSelector?.classList.remove('darken-1', 'white-text') :
+        this.mileButtonSelector?.classList.add('darken-1', 'white-text');
 
 
     this.mileIsToggled.emit(!this.model.addMiles);
   }
 
   toggleRun() {
-    this.model.addRunInput = this.runButtonSelector.classList.contains('darken-1');
+    this.model.addRunInput = this.runButtonSelector?.classList.contains('darken-1') ?? null;
 
     this.model.addRunInput ?
-      this.runButtonSelector.classList.remove('darken-1') :
-      this.runButtonSelector.classList.add('darken-1');
+      this.runButtonSelector?.classList.remove('darken-1') :
+      this.runButtonSelector?.classList.add('darken-1');
 
   this.runIsToggled.emit(!this.model.addRunInput);
   }
 
   toggleBike() {
-    this.model.addBikeInput = this.bikeButtonSelector.classList.contains('darken-1');
+    this.model.addBikeInput = this.bikeButtonSelector?.classList.contains('darken-1') ?? null;
 
     this.model.addBikeInput ?
-        this.bikeButtonSelector.classList.remove('darken-1') :
-        this.bikeButtonSelector.classList.add('darken-1');
+        this.bikeButtonSelector?.classList.remove('darken-1') :
+        this.bikeButtonSelector?.classList.add('darken-1');
 
     this.bikeIsToggled.emit(!this.model.addBikeInput);
   }
 
   toggleSwim() {
-    this.model.addSwimInput = this.swimButtonSelector.classList.contains('darken-1');
+    this.model.addSwimInput = this.swimButtonSelector?.classList.contains('darken-1') ?? null;
 
     this.model.addSwimInput ?
-        this.swimButtonSelector.classList.remove('darken-1') :
-        this.swimButtonSelector.classList.add('darken-1');
+        this.swimButtonSelector?.classList.remove('darken-1') :
+        this.swimButtonSelector?.classList.add('darken-1');
 
     this.swimIsToggled.emit(!this.model.addSwimInput);
   }

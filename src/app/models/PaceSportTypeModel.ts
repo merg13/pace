@@ -1,9 +1,9 @@
 export class PaceSportTypeModel {
 
-  addRunInput: boolean;
-  addBikeInput: boolean;
-  addSwimInput: boolean;
-  addKilometers: boolean;
-  addMiles: boolean;
+  addRunInput: boolean | null = true;
+  addBikeInput: boolean | null = false;
+  addSwimInput: boolean  | null= false;
+  addKilometers: boolean | null = true;
+  addMiles: boolean | null = true;
 
 }

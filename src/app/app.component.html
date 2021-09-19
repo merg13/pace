@@ -9,9 +9,12 @@
 <div class="container">
 
   <!-- component - buttons for picking what forms user wants to see -->
-    <!-- TODO: input/output property that binds to forms in order to hide/show diff forms for pacing-->
   <div class="row">
-    <app-pace-sport-type
+    <div class="col">
+      <a (click)='initInputs($event);' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+    </div>
+    <div class="col">
+      <app-pace-sport-type
       (runIsToggled)='runIsToggled($event)'
       (bikeIsToggled)='bikeIsToggled($event)'
       (swimIsToggled)='swimIsToggled($event)'
@@ -19,19 +22,18 @@
       (mileIsToggled)='MilesIsToggled($event)'
       [model]='paceSportTypeModel'
       ></app-pace-sport-type>
+    </div>
+    <div class="col">
+      <a (click)='handleClear($event);' class="btn-floating btn-large waves-effect waves-light black right"><i class="material-icons">clear</i></a>
+    </div>
   </div>
 
 
   <div class="row">
-    <app-common-form
-      [showKilometers]="paceSportTypeModel.addKilometers"
-      [showMiles]="paceSportTypeModel.addMiles"
-      [addRunInput]="paceSportTypeModel.addRunInput"
-      [addBikeInput]="paceSportTypeModel.addBikeInput"
-      [addSwimInput]="paceSportTypeModel.addSwimInput"
-      (paceFormsEmitter)="handleModelChange($event)"
-    ></app-common-form>
-  </div>
+    <div *ngFor="let form of inputModels">
+        <app-form-item [form]="form"></app-form-item>
+    </div>
+</div>
 
   <div class="row" *ngIf="!(totalResultModel.GetTotalMins() == 0 || totalResultModel.GetTotalMins() == null)">
     <!-- {{ totalResultModel | json }} -->

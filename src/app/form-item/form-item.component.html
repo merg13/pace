@@ -1,35 +1,35 @@
 <div class="row">
     <div class="col s1 left">
         <div class="input-field">
-          <label>{{inputModel.sportType.toString()}}</label>
+          <label>{{form.sportType.toString()}}</label>
         </div>
     </div>
     <div class="col s1 left">
         <div class="input-field">
-            <input (change)="handleFormInputChange($event)" [(ngModel)]="inputModel.totalTime.hours" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Hrs">
+            <input (change)="handleFormInputChange($event)" [(ngModel)]="form.totalTime.hours" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Hrs">
         </div>
     </div>
 
     <div class="col s1 left">
         <div class="input-field">
-            <input (change)="handleFormInputChange($event)" [(ngModel)]="inputModel.totalTime.minutes" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Mins">
+            <input (change)="handleFormInputChange($event)" [(ngModel)]="form.totalTime.minutes" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Mins">
         </div>
     </div>
     <div class="col s1 left">
         <div class="input-field">
-            <input (change)="handleFormInputChange($event)" [(ngModel)]="inputModel.totalTime.seconds" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Secs">
+            <input (change)="handleFormInputChange($event)" [(ngModel)]="form.totalTime.seconds" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Secs">
         </div>
     </div>
 
-    <div *ngIf="showMiles" class="col s3 left">
+    <div *ngIf="isMetricsMiles()" class="col s3 left">
         <div class="input-field">
-            <input (change)="handleFormInputChange($event)" id="distance_miles" (change)="inputModel.handleMilesOnChange($event)"  [(ngModel)]="inputModel.distanceMiles" type="number" placeholder="Distance (miles)">
+            <input (change)="handleFormInputChange($event)" id="distance_miles" (change)="form.handleMilesOnChange($event)"  [(ngModel)]="form.distanceMiles" type="number" placeholder="Distance (miles)">
         </div>
     </div>
 
-    <div *ngIf="showKilometers" class="col s3 left">
+    <div *ngIf="!isMetricsMiles()" class="col s3 left">
         <div class="input-field">
-            <input (change)="handleFormInputChange($event)" id="distance_kilos" (change)="inputModel.handleKilosOnChange($event)" [(ngModel)]="inputModel.distanceKilos" type="number" placeholder="Distance (kilometers)">
+            <input (change)="handleFormInputChange($event)" id="distance_kilos" (change)="form.handleKilosOnChange($event)" [(ngModel)]="form.distanceKilos" type="number" placeholder="Distance (kilometers)">
         </div>
     </div>
   </div>
@@ -40,16 +40,16 @@
   </div>
 
   <div class="col s5 left">
-      <label>{{inputModel.paceMiles.minutes | number:'1.0-0' }} : </label>
-      <label>{{ inputModel.paceMiles.seconds | number: '2.0-0' }} min/mi.</label> <br>
-      <label for="">{{inputModel.mph | number: '1.1'}} mph</label>
+      <label>{{form.paceMiles.minutes | number:'1.0-0' }} : </label>
+      <label>{{ form.paceMiles.seconds | number: '2.0-0' }} min/mi.</label> <br>
+      <label for="">{{form.mph | number: '1.1'}} mph</label>
   </div>
 
   <div class="col s4 left">
     <div class="label">
-      <label>{{inputModel.paceKilos.minutes | number: '1.0-0' }} : </label>
-      <label>{{ inputModel.paceKilos.seconds | number: '2.0-0' }} min/km.</label> <br>
-      <label for="">{{inputModel.kph | number: '1.1'}} kph</label>
+      <label>{{form.paceKilos.minutes | number: '1.0-0' }} : </label>
+      <label>{{ form.paceKilos.seconds | number: '2.0-0' }} min/km.</label> <br>
+      <label for="">{{form.kph | number: '1.1'}} kph</label>
 
     </div>
   </div>
@@ -57,7 +57,7 @@
 
 
 <!-- <div class="row">
-  <pre>{{inputModel | json}}</pre>
+  <pre>{{form | json}}</pre>
 </div> -->
 
 <hr>

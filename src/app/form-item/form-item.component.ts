@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SportTypeEnum } from '../enums/PaceEnums';
+import { SportTypeEnum, PaceTypeEnum } from '../enums/PaceEnums';
 import { MileToKiloRatio, PaceInputModel } from '../models/PaceInputModel';
+import { FormService } from '../services/form.service';
+import { PaceStore } from '../stores/pace.store';
 
 @Component({
   selector: 'app-form-item',
@@ -9,36 +11,29 @@ import { MileToKiloRatio, PaceInputModel } from '../models/PaceInputModel';
 })
 export class FormItemComponent implements OnInit {
 
-@Output() inputModelEmitter: EventEmitter<PaceInputModel>;
+  @Input() public form: PaceInputModel = { } as PaceInputModel;
+  @Input() metrics: PaceTypeEnum = PaceTypeEnum.Miles;
 
-@Input() inputModel: PaceInputModel;
-@Input() showKilometers: boolean;
-@Input() showMiles: boolean;
+  constructor(private formSerivce: FormService, private paceStore:PaceStore) { }
+  ngOnInit(): void {}
 
-  constructor() {
-
-    this.inputModel = new PaceInputModel();
-    this.inputModelEmitter = new EventEmitter<PaceInputModel>();
-  }
-
-  ngOnInit(): void {
-
-  }
-
-  handleFormInputChange(e: Event) {
-    this.inputModel.handleKilosOnChange();
-    this.inputModel.handleMilesOnChange();
-    this.inputModelEmitter.emit(this.inputModel);
+  handleFormInputChange(changedForm: PaceInputModel) {
+    this.form.handleKilosOnChange();
+    this.form.handleMilesOnChange();
+    this.formSerivce.PutForm(changedForm);
   }
 
   ConvertMilesToKilos = () => {
-    this.inputModel.distanceKilos = this.inputModel.distanceMiles * MileToKiloRatio;
+    this.form.distanceKilos = this.form.distanceMiles * MileToKiloRatio;
   }
 
   ConvertKilosToMiles = () => {
-    this.inputModel.distanceMiles = this.inputModel.distanceKilos / MileToKiloRatio;
+    this.form.distanceMiles = this.form.distanceKilos / MileToKiloRatio;
   }
 
+  isMetricsMiles = (): boolean => {
+    return this.metrics == PaceTypeEnum.Miles;
+  }
   handleCalculate = () => {
     //TODO: Calculate the output model and emit it back to parent;
 
