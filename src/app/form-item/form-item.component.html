@@ -6,30 +6,30 @@
     </div>
     <div class="col s1 left">
         <div class="input-field">
-            <input (change)="handleFormInputChange($event)" [(ngModel)]="form.totalTime.hours" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Hrs">
+            <input (change)="handleFormInputChange()" [(ngModel)]="form.totalTime.hours" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Hrs">
         </div>
     </div>
 
     <div class="col s1 left">
         <div class="input-field">
-            <input (change)="handleFormInputChange($event)" [(ngModel)]="form.totalTime.minutes" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Mins">
+            <input (change)="handleFormInputChange()" [(ngModel)]="form.totalTime.minutes" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Mins">
         </div>
     </div>
     <div class="col s1 left">
         <div class="input-field">
-            <input (change)="handleFormInputChange($event)" [(ngModel)]="form.totalTime.seconds" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Secs">
+            <input (change)="handleFormInputChange()" [(ngModel)]="form.totalTime.seconds" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Secs">
         </div>
     </div>
 
     <div *ngIf="isMetricsMiles()" class="col s3 left">
         <div class="input-field">
-            <input (change)="handleFormInputChange($event)" id="distance_miles" (change)="form.handleMilesOnChange($event)"  [(ngModel)]="form.distanceMiles" type="number" placeholder="Distance (miles)">
+            <input (change)="handleFormInputChange()" id="distance_miles" (change)="form.handleMilesOnChange()"  [(ngModel)]="form.distanceMiles" type="number" placeholder="Distance (miles)">
         </div>
     </div>
 
     <div *ngIf="!isMetricsMiles()" class="col s3 left">
         <div class="input-field">
-            <input (change)="handleFormInputChange($event)" id="distance_kilos" (change)="form.handleKilosOnChange($event)" [(ngModel)]="form.distanceKilos" type="number" placeholder="Distance (kilometers)">
+            <input (change)="handleFormInputChange()" id="distance_kilos" (change)="form.handleKilosOnChange()" [(ngModel)]="form.distanceKilos" type="number" placeholder="Distance (kilometers)">
         </div>
     </div>
   </div>

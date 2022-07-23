@@ -17,10 +17,10 @@ export class FormItemComponent implements OnInit {
   constructor(private formSerivce: FormService, private paceStore:PaceStore) { }
   ngOnInit(): void {}
 
-  handleFormInputChange(changedForm: PaceInputModel) {
+  handleFormInputChange() {
     this.form.handleKilosOnChange();
     this.form.handleMilesOnChange();
-    this.formSerivce.PutForm(changedForm);
+    this.formSerivce.PutForm(this.form);
   }
 
   ConvertMilesToKilos = () => {

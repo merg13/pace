@@ -30,7 +30,8 @@ jobs:
           node-version: '16.x'
 
       - run: npm ci
-      - run: npm install
+      - run: npm run build
+      - run: npm run test
       - run: npm install angular-cli-ghpages
 #       - run: npm run build --prefix ./TriangularArbitrary --prod --output-path=dist --base-href="https://triangulararbitrary.github.io/TriangularArbitrary"
 #       - run: export GH_TOKEN=${{ secrets.GITHUB_TOKEN }}

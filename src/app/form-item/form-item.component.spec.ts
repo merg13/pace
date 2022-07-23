@@ -1,22 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormService } from '../services/form.service';
+import { PaceStore } from '../stores/pace.store';
 
 import { FormItemComponent } from './form-item.component';
 
 describe('FormItemComponent', () => {
   let component: FormItemComponent;
   let fixture: ComponentFixture<FormItemComponent>;
+  let formService: FormService;
+  let paceStore: PaceStore;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ FormItemComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FormItemComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    paceStore = new PaceStore();
+    formService = new FormService(paceStore);
+    component = new FormItemComponent(formService, paceStore);
   });
 
   it('should create', () => {
