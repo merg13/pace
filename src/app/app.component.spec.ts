@@ -11,7 +11,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     paceStore = new PaceStore();
     formService = new FormService(paceStore);
-    component = new AppComponent(formService, paceStore);
+    component = new AppComponent(paceStore);
   });
 
   it('should create the app', () => {
