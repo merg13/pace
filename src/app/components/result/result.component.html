@@ -1,0 +1,32 @@
+<div class="row" *ngIf="!(model.GetTotalMins() == 0 || model.GetTotalMins() == null)">
+    <!-- {{ model | json }} -->
+    <h4>Results</h4> <br>
+
+    <div class="col s2 offset-s1 left">
+      <label for="">TOTAL TIME</label> <br>
+      <label for="">TOTAL DISTANCE</label> <br>
+      <label for="">AVERAGE PACE</label>
+    </div>    <div class="col s2 left">
+      <!-- TOTAL TIME -->
+      <label for="">{{model.totalTime.hours | number}} : </label>
+      <label>{{model.totalTime.minutes | number}} : </label>
+      <label>{{ model.totalTime.seconds | number}}</label> <br>
+      <!-- TOTAL DISTANCE -->
+      <label for="">{{model.distanceMiles | number}} mi. </label>
+      <label for="">{{model.distanceKilos | number}} km.</label>
+      <br>
+      <!-- AVERAGE PACE  -->
+      <label>{{model.paceMiles.minutes | number:'1.0-0' }} : </label>
+      <label>{{ model.paceMiles.seconds | number: '2.0-0' }} min/mi.   </label>
+      <label for="">({{model.mph | number: '1.1'}} mph)</label>
+    </div>
+    <div class="col s4 left">
+      <div class="label">
+        <br>
+        <br>
+        <label>{{model.paceKilos.minutes | number: '1.0-0' }} : </label>
+        <label>{{ model.paceKilos.seconds | number: '2.0-0' }} min/km.   </label>
+        <label for="">({{model.kph | number: '1.1'}} kph)</label>
+
+      </div>
+  </div>

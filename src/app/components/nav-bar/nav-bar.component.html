@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a (click)='initInputs($event);' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+          </div>
+          <div class="col">
+            <app-pace-sport-type
+            (runIsToggled)='runIsToggled($event)'
+            (bikeIsToggled)='bikeIsToggled($event)'
+            (swimIsToggled)='swimIsToggled($event)'
+            (kilometerIsToggled)='KilometersIsToggled($event)'
+            (mileIsToggled)='MilesIsToggled($event)'
+            [model]='paceSportTypeModel'
+            ></app-pace-sport-type>
+          </div>
+          <div class="col">
+            <a (click)='handleClear($event);' class="btn-floating btn-large waves-effect waves-light black right"><i class="material-icons">clear</i></a>
+          </div>
+    </div>
+</div>

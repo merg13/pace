@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SportTypeEnum, PaceTypeEnum } from '../enums/PaceEnums';
-import { MileToKiloRatio, PaceInputModel } from '../models/PaceInputModel';
-import { FormService } from '../services/form.service';
-import { PaceStore } from '../stores/pace.store';
+import { SportTypeEnum, PaceTypeEnum } from '../../enums/PaceEnums';
+import { MileToKiloRatio, PaceInputModel } from '../../models/PaceInputModel';
+import { FormService } from '../../services/form.service';
+import { PaceStore } from '../../stores/pace.store';
 
 @Component({
   selector: 'app-form-item',

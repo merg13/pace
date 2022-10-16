@@ -14,72 +14,27 @@ import { FormService } from './services/form.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit, OnChanges {
+export class AppComponent implements OnInit {
 
-  public paceSportTypeModel : PaceSportTypeModel = {} as PaceSportTypeModel;
+  public resultTitle = "Total Result";
+
   public inputModels: PaceInputModel[] = [] as PaceInputModel[];
   public totalResultModel: PaceInputModel = new PaceInputModel();
 
 
-  constructor(private formService: FormService, private paceStore: PaceStore) {
+  constructor(private paceStore: PaceStore) {
     paceStore.paceModels.subscribe(data => {
       this.inputModels = data;
     })
   }
 
   ngOnInit(): void {
-    this.paceSportTypeModel =
-    {
-      addRunInput: true,
-      addBikeInput: false,
-      addSwimInput: false,
-      addKilometers: true,
-      addMiles: true
-    };
-
     // DEBUG ONLY:
     // this.AddMockData();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    // this.GetResults();
+  handleFormChangeTotalResult = () => {
     this.HandleTotalResult();
-  }
-
-  handleModelChange(models: PaceInputModel[]) {
-    this.inputModels = models;
-    this.HandleTotalResult();
-  }
-
-  initInputs = (e: Event) => {
-    if(this.paceSportTypeModel.addRunInput) this.formService.PostForm(this.formService.GetNewForm(SportTypeEnum.Run));
-    if(this.paceSportTypeModel.addBikeInput) this.formService.PostForm(this.formService.GetNewForm(SportTypeEnum.Bike));
-    if(this.paceSportTypeModel.addSwimInput) this.formService.PostForm(this.formService.GetNewForm(SportTypeEnum.Swim));
-  }
-
-  handleClear = (e: Event) => {
-    this.formService.DeleteAllForms();
-  }
-
-  runIsToggled(isToggled: boolean) {
-    this.paceSportTypeModel.addRunInput = isToggled;
-  }
-  bikeIsToggled(isToggled: boolean) {
-    this.paceSportTypeModel.addBikeInput = isToggled;
-  }
-  swimIsToggled(isToggled: boolean) {
-    this.paceSportTypeModel.addSwimInput = isToggled;
-  }
-
-
-  KilometersIsToggled(isToggled: boolean) {
-    this.paceSportTypeModel.addKilometers = isToggled;
-  }
-
-  MilesIsToggled(isToggled: boolean) {
-    this.paceSportTypeModel.addMiles = isToggled;
   }
 
   AnyRunResults(): boolean {
@@ -110,39 +65,6 @@ export class AppComponent implements OnInit, OnChanges {
     this.totalResultModel.GetKmPace();
     this.totalResultModel.GetMiPace();
   }
-
-
-  // AddMockData = () => {
-  //   this.inputModels = [
-  //     {
-  //       paceType: PaceTypeEnum.Miles,
-  //       sportType: SportTypeEnum.Run,
-  //       totalTime: new Time(),
-  //       distanceMiles: 5,
-  //       distanceKilos: 8,
-  //       paceMiles: 0,
-  //       paceKilos: 0
-  //     },
-  //     {
-  //       paceType: PaceTypeEnum.Miles,
-  //       sportType: SportTypeEnum.Bike,
-  //       totalTime: new Time(),
-  //       distanceMiles: 5,
-  //       distanceKilos: 8,
-  //       paceMiles: 0,
-  //       paceKilos: 0
-  //     },
-  //     {
-  //       paceType: PaceTypeEnum.Miles,
-  //       sportType: SportTypeEnum.Swim,
-  //       totalTime: new Time(),
-  //       distanceMiles: 1,
-  //       distanceKilos: 2,
-  //       paceMiles: 0,
-  //       paceKilos: 0
-  //     }
-  //   ]
-  // }
 }
 
 

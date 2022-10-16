@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col s1 left">
+        <div class="input-field">
+          <label>{{form.sportType.toString()}}</label>
+        </div>
+    </div>
+    <div class="col s1 left">
+        <label for="hours">Hours</label>
+        <div class="input-field">
+            <input name="hours" (change)="handleFormInputChange()" [(ngModel)]="form.totalTime.hours" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Hrs">
+        </div>
+    </div>
+
+    <div class="col s1 left">
+       <label for="minutes">Minutes</label>
+        <div class="input-field">
+            <input name="minutes" (change)="handleFormInputChange()" [(ngModel)]="form.totalTime.minutes" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Mins">
+        </div>
+    </div>
+    <div class="col s1 left">
+        <label for="seconds">Seconds</label>
+
+        <div class="input-field">
+            <input name="seconds" (change)="handleFormInputChange()" [(ngModel)]="form.totalTime.seconds" type="number" min="0" oninput="validity.valid||(value='');" placeholder="Secs">
+        </div>
+    </div>
+
+    <div *ngIf="isMetricsMiles()" class="col s3 left">
+        <label for="distance">Distance</label>
+        <div class="input-field">
+            <input name="distance" (change)="handleFormInputChange()" id="distance_miles" (change)="form.handleMilesOnChange()"  [(ngModel)]="form.distanceMiles" type="number" placeholder="Distance (miles)">
+        </div>
+    </div>
+
+    <div *ngIf="!isMetricsMiles()" class="col s3 left">
+        <label for="distance">Distance</label>
+        <div class="input-field">
+            <input name="distance" (change)="handleFormInputChange()" id="distance_kilos" (change)="form.handleKilosOnChange()" [(ngModel)]="form.distanceKilos" type="number" placeholder="Distance (kilometers)">
+        </div>
+    </div>
+  </div>
+<div class="row">
+  <app-result [model]="form"></app-result>
+</div>
+
+
+<!-- <div class="row">
+  <pre>{{form | json}}</pre>
+</div> -->
+
+<hr>
+<!-- Summary            miles           km
+---  Pace               6:00 min/mi
+--- Total Distance      3.12mi        5km
+--- 1 mile == 1.60934 km
+-->

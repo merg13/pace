@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PaceSportTypeModel } from '../models/PaceSportTypeModel';
+import { PaceSportTypeModel } from '../../models/PaceSportTypeModel';
 
 @Component({
   selector: 'app-pace-sport-type',

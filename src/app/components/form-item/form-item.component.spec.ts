@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormService } from '../services/form.service';
-import { PaceStore } from '../stores/pace.store';
+import { FormService } from '../../services/form.service';
+import { PaceStore } from '../../stores/pace.store';
 
 import { FormItemComponent } from './form-item.component';
 

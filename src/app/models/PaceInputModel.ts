@@ -12,7 +12,7 @@ export class PaceInputModel {
 
     formId: string = uuidv4();
     paceType: PaceTypeEnum = PaceTypeEnum.Miles;
-    sportType: SportTypeEnum = SportTypeEnum.Run;
+    sportType: SportTypeEnum | SportTypeEnum[] = SportTypeEnum.Run;
     totalTime: BetterTime = { hours: 0, minutes: 0, seconds: 0};
     distanceMiles: number = 0;
     distanceKilos: number = 0;
